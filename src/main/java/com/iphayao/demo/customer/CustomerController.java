@@ -1,6 +1,5 @@
 package com.iphayao.demo.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +10,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    @Autowired
-    private CustomerService customerService;
+
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping()
     public ResponseEntity<?> getCustomers() {

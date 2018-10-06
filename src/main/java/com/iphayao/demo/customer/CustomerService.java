@@ -1,22 +1,22 @@
 package com.iphayao.demo.customer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CustomerService {
-    private CustomerRepository repository;
+    private final CustomerRepository repository;
 
-    @Autowired
     public CustomerService(CustomerRepository repository) {
         this.repository = repository;
     }
 
     public List<Customer> retrieveCustomers() {
-        return (List<Customer>) repository.findAll();
+        return repository.findAll();
     }
 
     public Optional<Customer> retrieveCustomers(String id) {
